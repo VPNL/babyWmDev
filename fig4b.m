@@ -44,7 +44,9 @@ colors=load('/share/kalanit/biac2/kgs/projects/babybrains/mri/code/babyDWI/color
 c=repelem(colors,10,1)
 s=scatter(meansAcr,slopeAcr,[],c,'filled')
 alpha(s,0.5)
-set(gca,'FontSize',20); box off; set(gca,'Linewidth',2);   
+set(gca,'FontSize',20); box off; set(gca,'Linewidth',2); 
+set(gca,'XAxisLocation','top')
+set(gca,'YAxisLocation','left')
 xlabel('T1 in newborns [s]','FontSize',22,'FontName','Arial');
 ylabel('T1 Slope [s/days]','FontSize',22,'FontName','Arial');
 ax = ancestor(s, 'axes')

@@ -7,6 +7,8 @@ Created on Mon Sep 14 09:19:29 2020
 """
 import numpy as np
 import seaborn as sns
+#import afqbrowser as afq
+#from afqbrowser import browser
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
@@ -15,38 +17,38 @@ import pylab as plot
 from numpy.matlib import repmat
 from itertools import repeat
 
-mri0R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/mri0R1ForPy.mat')
-mri0Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri0TractsForPy.mat')
-mri0Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri0SubjForPy.mat')
-mri0Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri0NodesForPy.mat')
+mri0T1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri0MdForPy.mat')
+mri0Tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri0TractsForPy.mat')
+mri0Subj=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri0SubjForPy.mat')
+mri0Nodes=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri0NodesForPy.mat')
 
-mri3R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/mri3R1ForPy.mat')
-mri3Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri3TractsForPy.mat')
-mri3Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri3SubjForPy.mat')
-mri3Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri3NodesForPy.mat')
+mri3T1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri3MdForPy.mat')
+mri3Tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri3TractsForPy.mat')
+mri3Subj=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri3SubjForPy.mat')
+mri3Nodes=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri3NodesForPy.mat')
 
-mri6R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data//mri6R1ForPy.mat')
-mri6Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri6TractsForPy.mat')
-mri6Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri6SubjForPy.mat')
-mri6Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri6NodesForPy.mat')
+mri6T1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri6MdForPy.mat')
+mri6Tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri6TractsForPy.mat')
+mri6Subj=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri6SubjForPy.mat')
+mri6Nodes=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/mri6NodesForPy.mat')
 
 df0=pd.DataFrame(mri0Subj['mri0_subj'])
 df0.columns=['Subj']
 df0.insert(1,"tractIdx",mri0Tracts['mri0_tracts'])
 df0.insert(2,"Nodes",mri0Nodes['mri0_nodes'])
-df0.insert(3,"R1",mri0R1['mri0_R1']*1000)
+df0.insert(3,"T1",mri0T1['mri0_Md'])
 
 df3=pd.DataFrame(mri3Subj['mri3_subj'])
 df3.columns=['Subj']
 df3.insert(1,"tractIdx",mri3Tracts['mri3_tracts'])
 df3.insert(2,"Nodes",mri3Nodes['mri3_nodes'])
-df3.insert(3,"R1",mri3R1['mri3_R1']*1000)
+df3.insert(3,"T1",mri3T1['mri3_Md'])
 
 df6=pd.DataFrame(mri6Subj['mri6_subj'])
 df6.columns=['Subj']
 df6.insert(1,"tractIdx",mri6Tracts['mri6_tracts'])
 df6.insert(2,"Nodes",mri6Nodes['mri6_nodes'])
-df6.insert(3,"R1",mri6R1['mri6_R1']*1000)
+df6.insert(3,"T1",mri6T1['mri6_Md'])
 
 
 tracts=['ATR', 'ATR', 'CS', 'CS', 'CC', 'CC',
@@ -62,7 +64,7 @@ tractPos = {'CS': (0, 0), 'ATR': (0, 1),'VOF': (1, 3), 'pAF': (1, 4),
 figsize=(15,10)
 fig, axes=plt.subplots(3,5,frameon=False,figsize=figsize)
 fig.tight_layout
-plt.subplots_adjust(left=0.07,bottom=0.01,right=0.99,top=1,wspace=0.2,hspace=0.2)
+plt.subplots_adjust(left=0.1,bottom=0.01,right=0.99,top=1,wspace=0.2,hspace=0.2)
 sns.despine()
 
 color_list_all=sns.color_palette("tab20")+sns.color_palette("tab20b") 
@@ -126,12 +128,12 @@ for hem in hems:
             colors=sns.color_palette("tab20")
             ax=axes[tractPos[tracts[ct]]]
             ax.clear()
-            ax.set_ylim([0.3,0.8])
-            ax.set_aspect(150)   
+            ax.set_ylim([0.0007,0.002])
+            ax.set_aspect(60000)   
             
             if t=="mean":
                 currentTract=df0.query("tractIdx == @ct")
-                plt=sns.lineplot(x="Nodes", y="R1",
+                plt=sns.lineplot(x="Nodes", y="T1",
                               data=currentTract,hue="tractIdx",
                               estimator='mean',ci=95,n_boot=1000,
                               palette=[color_list_chosen[col+1]],
@@ -140,7 +142,7 @@ for hem in hems:
                 if ct!=8 and ct!=9:
                     tr=ct+1
                     currentTract=df0.query("tractIdx == @tr")
-                    plt=sns.lineplot(x="Nodes", y="R1",
+                    plt=sns.lineplot(x="Nodes", y="T1",
                                   data=currentTract,hue="tractIdx",
                                   estimator='mean',ci=95,n_boot=1000,
                                   palette=[color_list_chosen[col+1]],
@@ -149,7 +151,7 @@ for hem in hems:
                 
                 currentTract=df3.query("tractIdx == @ct")
                 sns.set(rc={"lines.linewidth": 3})
-                plt=sns.lineplot(x="Nodes", y="R1",
+                plt=sns.lineplot(x="Nodes", y="T1",
                               data=currentTract,hue="tractIdx",
                               estimator='mean',ci=95,n_boot=1000,
                               palette=[np.mean([color_list_chosen[col+1],color_list_chosen[col]],axis=0)],
@@ -159,7 +161,7 @@ for hem in hems:
                     tr=ct+1
                     currentTract=df3.query("tractIdx == @tr")
                     sns.set(style="ticks",rc={"lines.linewidth": 3})
-                    plt=sns.lineplot(x="Nodes", y="R1",
+                    plt=sns.lineplot(x="Nodes", y="T1",
                                   data=currentTract,hue="tractIdx",
                                   estimator='mean',ci=95,n_boot=1000,
                                   palette=[np.mean([color_list_chosen[col+1],color_list_chosen[col]],axis=0)],
@@ -168,7 +170,7 @@ for hem in hems:
                 
                 currentTract=df6.query("tractIdx == @ct")
                 sns.set(style="ticks",rc={"lines.linewidth": 3})
-                plt=sns.lineplot(x="Nodes", y="R1",
+                plt=sns.lineplot(x="Nodes", y="T1",
                               data=currentTract,hue="tractIdx",
                               estimator='mean',ci=95,n_boot=1000,
                               palette=[color_list_chosen[col]],legend=False,ax=ax,alpha=0.5)
@@ -177,7 +179,7 @@ for hem in hems:
                     tr=ct+1
                     currentTract=df6.query("tractIdx == @tr")
                     sns.set(style="ticks",rc={"lines.linewidth": 3})
-                    plt=sns.lineplot(x="Nodes", y="R1",
+                    plt=sns.lineplot(x="Nodes", y="T1",
                                   data=currentTract,hue="tractIdx",
                                   estimator='mean',ci=95,n_boot=1000,
                                   palette=[color_list_chosen[col]],legend=False,ax=ax,alpha=0.5)
@@ -192,14 +194,13 @@ for hem in hems:
                 ax.set_xlabel(x_labels[ct],fontsize=20)
 
                 if ct == 2 or ct==14 or ct==18 or ct==8 or ct==22 :
-                    ax.set_ylabel(r'R1 [s$\mathregular{^{-1}}$]',fontsize=20)
-                    #ax.set_ylabel('R1 [1/s]',fontsize=20)
-                    ax.set_yticks([0.4,0.6,0.8])
-                    ax.set_yticklabels([0.4,0.6,0.8],Fontsize=18)
+                    ax.set_ylabel(r'MD [mm$\mathregular{^{2}}/s$]',fontsize=20)
+                    ax.set_yticks([0.001,0.002])
+                    ax.set_yticklabels([0.001,0.002],Fontsize=18)
                 else:
                     ax.set_ylabel('',fontsize=14)
-                    ax.set_yticks([0.6,0.8])
-                    ax.set_yticklabels([])
+                    ax.set_yticks([0.001,0.002])
+                    ax.set_yticklabels([],Fontsize=18)
                     ax.spines['left'].set_visible(False)
 
                 ax.set_xticks([1,50,100])
@@ -214,25 +215,25 @@ for hem in hems:
                 
             else:
                # ax.set_ylim([1,1.8])
-               # ax.set_aspect(35)
+                #ax.set_aspect(35)
                 #ax.set_ylim([1,2.8])
                 sns.set(rc={"lines.linewidth": 2})
                 currentTract=df0.query("tractIdx == @ct")
-                plt=sns.lineplot(x="Nodes", y="R1",
+                plt=sns.lineplot(x="Nodes", y="T1",
                               data=currentTract,hue="tractIdx",
                               estimator=None,units='Subj',
                               palette=[color_list_chosen[col+1]],
                               legend=False,ax=ax,style=True,dashes=[(2,2)])
                 
                 currentTract=df3.query("tractIdx == @ct")
-                plt=sns.lineplot(x="Nodes", y="R1",
+                plt=sns.lineplot(x="Nodes", y="T1",
                               data=currentTract,hue="tractIdx",
                               estimator=None,units='Subj',
                               palette=[np.mean([color_list_chosen[col+1],color_list_chosen[col]],axis=0)],
                               legend=False,ax=ax,style=True,dashes=[(4,4)])
                 
                 currentTract=df6.query("tractIdx == @ct")
-                plt=sns.lineplot(x="Nodes", y="R1",
+                plt=sns.lineplot(x="Nodes", y="T1",
                               data=currentTract,hue="tractIdx",
                               estimator=None,units='Subj',
                               palette=[color_list_chosen[col]],legend=False,ax=ax)
@@ -240,11 +241,11 @@ for hem in hems:
                 line1=Line2D([],[],color=color_list_chosen[col],linestyle=':')
                 line2=Line2D([],[],color=color_list_chosen[col],linestyle='dashed')
                 line3=Line2D([],[],color=color_list_chosen[col],linestyle='-')
-                ax.legend([line1,line2,line3],['0m','3m','6m'],loc="upper left",borderpad=0.01,bbox_to_anchor=(0.25,0.2),ncol=3,framealpha=0.75,frameon=True,edgecolor=[1,1,1],prop={'size':12},fancybox=True,handlelength=1.5)
+                ax.legend([line1,line2,line3],['0m','3m','6m'],loc="upper left",borderpad=0.01,bbox_to_anchor=(0.1,0.2),ncol=3,framealpha=0.75,frameon=True,edgecolor=[1,1,1],prop={'size':12},fancybox=True,handlelength=1.5)
                     		   
                 ax.set_title(tracts[ct],fontsize=20)
                 ax.set_xlabel(x_labels[ct],fontsize=14)
-                ax.set_ylabel('R1 [1/s]',fontsize=14)
+                ax.set_ylabel('MD [mm2/s]',fontsize=14)
                 axes[0, 2].axis("off")
                 axes[1, 2].axis("off")
             
@@ -253,5 +254,6 @@ for hem in hems:
                     axes[1, 3].axis("off")
                     axes[1, 4].axis("off")
                     
-            fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig3_R1.png",format='png')
-   
+    fig.savefig("/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Output/Fig3_MD.png",format='png')
+    #fig.clf()
+    #fig

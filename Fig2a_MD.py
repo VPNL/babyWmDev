@@ -15,21 +15,21 @@ from matplotlib.lines import Line2D
 from matplotlib import markers
 import pylab as plot
 
-R1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/MeanR1ForPy.mat')
+Md=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/MeanMdForPy.mat')
 age=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/AgeForPy.mat')
 tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractVecForPy.mat')
 
-xReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/xRegR1ForPy.mat')
-yReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/yRegR1ForPy.mat')
-tReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractRegR1ForPy.mat')
+xReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/xRegMdForPy.mat')
+yReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/yRegMdForPy.mat')
+tReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractRegMdForPy.mat')
 
-yRegLower=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yLowerRegR1ForPy.mat')
-yRegUpper=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yUpperRegR1ForPy.mat')
+yRegLower=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yLowerRegMdForPy.mat')
+yRegUpper=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yUpperRegMdForPy.mat')
 
 df=pd.DataFrame(age['age'])
 df.columns=['age']
 df.insert(1,"tractIdx",tracts['tractVec'])
-df.insert(2,"R1",R1['R1'])
+df.insert(2,"Md",Md['Md_mean_all'])
 
 dfReg=pd.DataFrame(xReg['x'])
 dfReg.columns=['xReg']
@@ -107,8 +107,8 @@ for hem in hems:
         
                     
         ax=axes[tractPos[tracts[ct]]]
-        ax.set_ylim([0.38,0.8])
-        ax.set_aspect(500)   
+        ax.set_ylim([0.0009,0.0017])
+        ax.set_aspect(250000)   
         
         
         currentTract=dfReg.query("tractIdx == @ct")
@@ -121,7 +121,7 @@ for hem in hems:
         legend=False,ax=ax)
         
         currentTract=df.query("tractIdx == @ct")
-        plt=sns.scatterplot(x="age", y="R1",
+        plt=sns.scatterplot(x="age", y="Md",
         data=currentTract,hue="tractIdx",
         palette=[color_list_chosen[col]],
         legend=False,ax=ax,marker=m)
@@ -131,10 +131,10 @@ for hem in hems:
         ax.set_xlabel('age [days]',fontsize=14)
         
         if ct == 2 or ct==3 or ct==22 or ct==23 or ct==8 or ct==18 or ct==19 or ct==14 or ct==15:
-            ax.set_ylabel(r'R1 [s$\mathregular{^{-1}}$]',fontsize=14)
-            #ax.set_ylabel('R1 [${s10^-1}$]',fontsize=14)
-            ax.set_yticks([0.4,0.6,0.8])
-            ax.set_yticklabels([0.4,0.6,0.8],color=[0,0,0])
+            #ax.set_ylabel('Md [mm2/s]',fontsize=14)
+            ax.set_ylabel(r'MD [mm$\mathregular{^{2}}/s$]',fontsize=14)
+            ax.set_yticks([0.0011,0.0015])
+            ax.set_yticklabels([0.0011,0.0015],color=[0,0,0])
             ax.set_xticklabels([0,1,100,200],color=[0,0,0])
         else:
             ax.set_ylabel('',fontsize=14)
@@ -150,6 +150,6 @@ for hem in hems:
         if ct!=8 and ct !=9:
             line1=Line2D([],[],color='w',linestyle=':',marker='o',markerfacecolor=color_list_chosen[col-1],markersize=10)
             line2=Line2D([],[],color='w',linestyle='dashed',marker="X",markerfacecolor=color_list_chosen[col],markersize=10)
-            ax.legend([line1,line2],['LH','RH'],loc="lower left",bbox_to_anchor=(-0.08,0.60),ncol=1,frameon=False,prop={'size':12},fancybox=True,handlelength=1.5)
-                                     
-fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig2a_R1.png",format='png')       
+            ax.legend([line1,line2],['LH','RH'],loc="lower left",bbox_to_anchor=(0.60,0.60),ncol=1,frameon=False,prop={'size':12},fancybox=True,handlelength=1.5)
+                                
+fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig2a_MD.png",format='png')       
