@@ -46,11 +46,11 @@ hold on;
 R1=R1w+(R1m-R1w)*(m);
 plot (m,R1,'k-','LineWidth',3);
 
-set(gca, 'Fontsize', 18);
-xlabel('myelin fraction [m] in a voxel','Fontsize',18);
-ylabel('R1 [s^{-1}]','Fontsize',18);
+set(gca, 'Fontsize', 14);
+xlabel('myelin fraction [m] in a voxel','Fontsize',14);
+ylabel('R1 [s^{-1}]','Fontsize',14);
 
-title(({'R1 is linearly related', 'to myelin fraction (m)'}),'Fontsize',16);
+title(({'R1 is linearly related', 'to myelin fraction (m)'}),'Fontsize',12);
 
 
 % Here's the calculation of dR1(m)/dm:
@@ -76,10 +76,10 @@ subplot (2,2,2)
 hold on; 
 dR1dm=(R1m-R1w)*ones(size (m)); 
 plot (m,dR1dm,'k-','LineWidth',3);
-set(gca, 'Fontsize', 18);
-xlabel('myelin fraction [m]','Fontsize',18);
-ylabel('dR1/dm [s^{-1}/m]','Fontsize',18);
-title (({'Change in myelin (dm) produces', 'constant change in R1 (dR1)'}),'Fontsize',16);
+set(gca, 'Fontsize', 14);
+xlabel('myelin fraction [m]','Fontsize',14);
+ylabel('dR1/dm [s^{-1}/m]','Fontsize',14);
+title (({'Change in myelin (dm) produces', 'constant change in R1 (dR1)'}),'Fontsize',12);
 
 %% Now let's simulate our developmental hypotheses
 % So far we have generated voxels with different fractions of myelin in
@@ -112,10 +112,10 @@ plot (m,dmh3,'cd','Markersize',8);
 %h=legend({'h1: start first/finish first', 'h2: speed up','h3: no relation'},'Location','northeast'); set(h,'box','off','FontSize',14 );
 
 axis([0 max(m) 0 r]);
-set(gca, 'Fontsize', 18);
-xlabel('myelin at birth [m]','Fontsize',18);
-ylabel('change in myelin [dm]','Fontsize',18);
-title (({'Change in myelin (dm) relative', 'to inital myelin fraction (m)'}),'Fontsize',16);
+set(gca, 'Fontsize', 14);
+xlabel('myelin at birth [m]','Fontsize',14);
+ylabel('change in myelin [dm]','Fontsize',14);
+title (({'Change in myelin (dm) relative', 'to inital myelin fraction (m)'}),'Fontsize',12);
 
 
 %% Now let's calculate dR1 according to these 3 hypotheses
@@ -127,16 +127,16 @@ dR3=dmh3.*dR1dm;
 % Now let's plot R1 change vs R1 at birth according to each hypothesis
 subplot (2,2,4)
 
-set(gca, 'Fontsize', 18);
+set(gca, 'Fontsize', 14);
 hold on; box off;
 R1birth=R1;
 plot (R1birth,dR1,'k-+','Markersize',8);
 plot (R1birth,dR2,'b-o','Markersize',8);
 plot (R1birth,dR3,'cd','Markersize',8);
-%h=legend({'h1: starts first/finishes first', 'h2: speed up','h3: no relation'},'Location','northeast'); set(h,'box','off','FontSize', 16);
-xlabel('R1 at birth [s^{-1}]','Fontsize',18);
-ylabel('dR1 [s^{-1}]','Fontsize',18);
-title ({'Change in R1 relative to', 'intial R1 is distinct'},'Fontsize',16);
+%h=legend({'h1: starts first/finishes first', 'h2: speed up','h3: no relation'},'Location','northeast'); set(h,'box','off','FontSize', 14);
+xlabel('R1 at birth [s^{-1}]','Fontsize',14);
+ylabel('dR1 [s^{-1}]','Fontsize',14);
+title ({'Change in R1 relative to intial R1',' is distinct for the 3 hypotheses'},'Fontsize',12);
 
 % :-)
 % This plot shows that you can make infererences from this graph relating
@@ -168,10 +168,10 @@ hold on;
 T1=a./(b+c*(m));
 plot (m,T1,'k-','LineWidth',3);
 
-set(gca, 'Fontsize', 18);
-xlabel('myelin fraction in a voxel (m)','Fontsize',18);
-ylabel('T1 [1/s]','Fontsize',18);
-title ({'T1 is proporiton to',' 1/myelin fraction'},'Fontsize',16);
+set(gca, 'Fontsize', 14);
+xlabel('myelin fraction in a voxel (m)','Fontsize',14);
+ylabel('T1 [1/s]','Fontsize',14);
+title ({'T1 is proporiton to',' 1/myelin fraction'},'Fontsize',12);
 
 % Higher myelin content is associated with lower T1
 
@@ -195,11 +195,11 @@ hold on;
 dT1dm=-a*c./((b+c*(m)).^2);
 plot (m,dT1dm,'k-','LineWidth',3);
 
-set(gca, 'Fontsize', 18);
-xlabel('myelin fraction [m]','Fontsize',18);
-ylabel('dT1/dm [s/m]','Fontsize',18);
-titlestr=[{'Same change myelin produces greater reduction', 'in T1 with smaller myelin fraction'}];
-title (titlestr ,'Fontsize',16);
+set(gca, 'Fontsize', 14);
+xlabel('myelin fraction [m]','Fontsize',14);
+ylabel('dT1/dm [s/m]','Fontsize',14);
+titlestr=[{'Change in myelin produces greater reduction', 'in T1 with smaller myelin fraction'}];
+title (titlestr ,'Fontsize',12);
 
 
 %% Now let's simulate our developmental hypotheses
@@ -228,10 +228,10 @@ plot (m,dmh3,'cd','Markersize',8);
 %h=legend({'h1: starts first/finish first', 'h2: speed up','h3: no relation'},'Location','northeast'); set(h,'box','off','FontSize', 10);
 
 axis([0 max(m) 0 r]);
-set(gca, 'Fontsize', 18);
-xlabel('myelin at birth [m]','Fontsize',18);
-ylabel(' change in myelin [dm]','Fontsize',18);
-title ([{'Change in myelin (dm) relative', 'to initial myelin fraction (m)'}],'Fontsize',16);
+set(gca, 'Fontsize', 14);
+xlabel('myelin at birth [m]','Fontsize',14);
+ylabel(' change in myelin [dm]','Fontsize',14);
+title ([{'Change in myelin (dm) relative', 'to initial myelin fraction (m)'}],'Fontsize',12);
 
 %% Let's calculate dT1 as a function of dm for each of these hypotheses
 % to do that we do a point by point multiplication of the graphs of each
@@ -254,10 +254,10 @@ plot (T1birth,dT2,'b-o','Markersize',8);
 plot (T1birth,dT3,'cd','Markersize',8);
 %h=legend({'h1: starts first/finish first', 'h2: speed up','h3: no relation'},'Location','southwest'); set(h,'box','off','FontSize', 10);
 
-set(gca, 'Fontsize', 18);
-xlabel('T1 at birth [s]','Fontsize',18);
-ylabel('dT1[s]','Fontsize',18);
-title ([{'Change in T1 relative to initial T1',' is not distinct for the 3 hypotheses'}],'Fontsize',16);
+set(gca, 'Fontsize', 14);
+xlabel('T1 at birth [s]','Fontsize',14);
+ylabel('dT1[s]','Fontsize',14);
+title ([{'Change in T1 relative to initial T1',' is not distinct for the 3 hypotheses'}],'Fontsize',12);
 
 % :-( 
 % you cannot compare dT1 to T1 at birth to distinguish developmental hypotheses

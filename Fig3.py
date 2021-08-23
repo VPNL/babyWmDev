@@ -15,20 +15,20 @@ import pylab as plot
 from numpy.matlib import repmat
 from itertools import repeat
 
-mri0R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/mri0R1ForPy.mat')
-mri0Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri0TractsForPy.mat')
-mri0Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri0SubjForPy.mat')
-mri0Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri0NodesForPy.mat')
+mri0R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0R1ForPy.mat')
+mri0Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0TractsForPy.mat')
+mri0Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0SubjForPy.mat')
+mri0Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0NodesForPy.mat')
 
-mri3R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/mri3R1ForPy.mat')
-mri3Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri3TractsForPy.mat')
-mri3Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri3SubjForPy.mat')
-mri3Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri3NodesForPy.mat')
+mri3R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri3R1ForPy.mat')
+mri3Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri3TractsForPy.mat')
+mri3Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri3SubjForPy.mat')
+mri3Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri3NodesForPy.mat')
 
-mri6R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data//mri6R1ForPy.mat')
-mri6Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri6TractsForPy.mat')
-mri6Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri6SubjForPy.mat')
-mri6Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/CatchUp/Data/mri6NodesForPy.mat')
+mri6R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data//mri6R1ForPy.mat')
+mri6Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri6TractsForPy.mat')
+mri6Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri6SubjForPy.mat')
+mri6Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri6NodesForPy.mat')
 
 df0=pd.DataFrame(mri0Subj['mri0_subj'])
 df0.columns=['Subj']
@@ -253,5 +253,5 @@ for hem in hems:
                     axes[1, 3].axis("off")
                     axes[1, 4].axis("off")
                     
-            fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig3_R1.png",format='png')
+            fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig3.png",format='png')
    

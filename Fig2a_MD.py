@@ -15,16 +15,16 @@ from matplotlib.lines import Line2D
 from matplotlib import markers
 import pylab as plot
 
-Md=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/MeanMdForPy.mat')
-age=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/AgeForPy.mat')
-tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractVecForPy.mat')
+Md=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/MeanMdForPy.mat')
+age=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/AgeForPy.mat')
+tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/tractVecForPy.mat')
 
-xReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/xRegMdForPy.mat')
-yReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/yRegMdForPy.mat')
-tReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractRegMdForPy.mat')
+xReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/xRegMdForPy.mat')
+yReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/yRegMdForPy.mat')
+tReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/tractRegMdForPy.mat')
 
-yRegLower=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yLowerRegMdForPy.mat')
-yRegUpper=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yUpperRegMdForPy.mat')
+yRegLower=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/yLowerRegMdForPy.mat')
+yRegUpper=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/yUpperRegMdForPy.mat')
 
 df=pd.DataFrame(age['age'])
 df.columns=['age']

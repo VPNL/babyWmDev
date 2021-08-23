@@ -15,16 +15,16 @@ from matplotlib.lines import Line2D
 from matplotlib import markers
 import pylab as plot
 
-R1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/MeanR1ForPy.mat')
-age=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/AgeForPy.mat')
-tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractVecForPy.mat')
+R1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/MeanR1ForPy.mat')
+age=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/AgeForPy.mat')
+tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/tractVecForPy.mat')
 
-xReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/xRegR1ForPy.mat')
-yReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/yRegR1ForPy.mat')
-tReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/python/data/tractRegR1ForPy.mat')
+xReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/xRegR1ForPy.mat')
+yReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/yRegR1ForPy.mat')
+tReg=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/tractRegR1ForPy.mat')
 
-yRegLower=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yLowerRegR1ForPy.mat')
-yRegUpper=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/yUpperRegR1ForPy.mat')
+yRegLower=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/yLowerRegR1ForPy.mat')
+yRegUpper=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/yUpperRegR1ForPy.mat')
 
 df=pd.DataFrame(age['age'])
 df.columns=['age']
@@ -152,4 +152,4 @@ for hem in hems:
             line2=Line2D([],[],color='w',linestyle='dashed',marker="X",markerfacecolor=color_list_chosen[col],markersize=10)
             ax.legend([line1,line2],['LH','RH'],loc="lower left",bbox_to_anchor=(-0.08,0.60),ncol=1,frameon=False,prop={'size':12},fancybox=True,handlelength=1.5)
                                      
-fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig2a_R1.png",format='png')       
+fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig2a.png",format='png')       
