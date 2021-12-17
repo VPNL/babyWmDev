@@ -5,6 +5,8 @@ Created on Mon Sep 14 09:19:29 2020
 
 @author: grotheer
 """
+
+#set up the necessary dependencies
 import numpy as np
 import seaborn as sns
 #import afqbrowser as afq
@@ -17,22 +19,23 @@ import pylab as plot
 from numpy.matlib import repmat
 from itertools import repeat
 
-T1Inter=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/interMeanR1MRI0AcrForPy.mat')
-T1InterSe=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/interSeR1MRI0AcrForPy.mat')
-T1Slope=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/slopeMeanR1AcrForPy.mat')
-T1SlopeSe=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/slopeSeR1AcrForPy.mat')
+#load the data needed for this figure
+R1Inter=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/interMeanR1MRI0AcrForPy.mat')
+R1InterSe=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/interSeR1MRI0AcrForPy.mat')
+R1Slope=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/slopeMeanR1AcrForPy.mat')
+R1SlopeSe=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/slopeSeR1AcrForPy.mat')
 Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/tractsAcrForPy.mat')
 Nodes=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/nodesAcrForPy.mat')
 
-df=pd.DataFrame(T1Inter['meanMRI0R1'])
+df=pd.DataFrame(R1Inter['meanMRI0R1'])
 df.columns=['R1Inter']
-df.insert(1,"R1InterSe",T1InterSe['seMRI0R1'])
-df.insert(2,"R1Slope",T1Slope['slopeMeanR1'])
-df.insert(3,"R1SlopeSe",T1SlopeSe['slopeSeR1'])
+df.insert(1,"R1InterSe",R1InterSe['seMRI0R1'])
+df.insert(2,"R1Slope",R1Slope['slopeMeanR1'])
+df.insert(3,"R1SlopeSe",R1SlopeSe['slopeSeR1'])
 df.insert(4,"tractIdx",Tracts['tracts'])
 df.insert(5,"Nodes",Nodes['nodes'])
 
-
+#set up the bundle names and colors
 tracts=['ATR', 'ATR', 'CS', 'CS', 'CC', 'CC',
         'CH', 'CH', 'FcMa', 'FcMi','IFOF', 'IFOF',
         'ILF', 'ILF', 'SLF', 'SLF','UCI', 'UCI', 
@@ -84,6 +87,8 @@ plot.rcParams.update(params)
 
 type=['mean']
 hems=['LH']
+
+#create the actual figure
 
 for hem in hems:
     
@@ -208,6 +213,7 @@ for hem in hems:
 
             ax.legend([line1,line2],['0m','slope'],loc="upper left",borderpad=0.01,bbox_to_anchor=(-0.05,0.2),ncol=2,framealpha=0.75,frameon=True,edgecolor=[1,1,1],prop={'size':16},fancybox=True,handlelength=1.5)
      
+            #save the figure
             fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig4.png",format='png',dpi=300)
                 
  

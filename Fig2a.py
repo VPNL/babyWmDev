@@ -6,6 +6,7 @@ Created on Thu Sep 17 09:43:16 2020
 @author: grotheer
 """
 
+#import all dependencies
 import numpy as np
 import seaborn as sns
 import pandas as pd
@@ -15,6 +16,7 @@ from matplotlib.lines import Line2D
 from matplotlib import markers
 import pylab as plot
 
+#load the data needed for the plot
 R1=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/MeanR1ForPy.mat')
 age=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/AgeForPy.mat')
 tracts=loadmat('/biac2/kgs/Another link to babybrains/mri/code/babyDWI/babyWmDev/Data/tractVecForPy.mat')
@@ -38,7 +40,7 @@ dfReg.insert(2,"yReg",yReg['y'])
 dfReg.insert(3,"yRegLower",yRegLower['yLower'])
 dfReg.insert(4,"yRegUpper",yRegUpper['yUpper'])
 
-
+#set up the bundle names and colors
 tracts=['ATR', 'ATR', 'CS', 'CS', 'CC', 'CC',
         'CH', 'CH', 'FcMa', 'FcMi','IFOF', 'IFOF',
         'ILF', 'ILF', 'SLF', 'SLF','UCI', 'UCI', 
@@ -66,7 +68,7 @@ plot.rcParams.update(params)
 
 foi=[0,2,4,8,9,10,12,14,16,18,20,22,24]
 
-
+#create the actual figure
 figsize=(15,6)
 fig, axes=plt.subplots(2,8,frameon=False,figsize=figsize)
 fig.tight_layout
@@ -151,5 +153,6 @@ for hem in hems:
             line1=Line2D([],[],color='w',linestyle=':',marker='o',markerfacecolor=color_list_chosen[col-1],markersize=10)
             line2=Line2D([],[],color='w',linestyle='dashed',marker="X",markerfacecolor=color_list_chosen[col],markersize=10)
             ax.legend([line1,line2],['LH','RH'],loc="lower left",bbox_to_anchor=(-0.08,0.60),ncol=1,frameon=False,prop={'size':12},fancybox=True,handlelength=1.5)
-                                     
+
+#save the figure                                     
 fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig2a.png",format='png')       

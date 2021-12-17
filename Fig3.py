@@ -5,6 +5,8 @@ Created on Mon Sep 14 09:19:29 2020
 
 @author: grotheer
 """
+
+#import all dependencies
 import numpy as np
 import seaborn as sns
 import pandas as pd
@@ -15,6 +17,7 @@ import pylab as plot
 from numpy.matlib import repmat
 from itertools import repeat
 
+#load the necessary data
 mri0R1=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0R1ForPy.mat')
 mri0Tracts=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0TractsForPy.mat')
 mri0Subj=loadmat('/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Data/mri0SubjForPy.mat')
@@ -48,7 +51,7 @@ df6.insert(1,"tractIdx",mri6Tracts['mri6_tracts'])
 df6.insert(2,"Nodes",mri6Nodes['mri6_nodes'])
 df6.insert(3,"R1",mri6R1['mri6_R1']*1000)
 
-
+# set up the bundle names and colors
 tracts=['ATR', 'ATR', 'CS', 'CS', 'CC', 'CC',
         'CH', 'CH', 'FcMa', 'FcMi','IFOF', 'IFOF',
         'ILF', 'ILF', 'SLF', 'SLF','UCI', 'UCI', 
@@ -101,6 +104,8 @@ plot.rcParams.update(params)
 
 type=['mean']
 hems=['LH']
+
+#create the actual figure
 
 for hem in hems:
     
@@ -252,6 +257,8 @@ for hem in hems:
                 if hem=='RH':
                     axes[1, 3].axis("off")
                     axes[1, 4].axis("off")
+                    
+            #save the figure
                     
             fig.savefig("/biac2/kgs/projects/babybrains/mri/code/babyDWI/babyWmDev/Output/Fig3.png",format='png')
    

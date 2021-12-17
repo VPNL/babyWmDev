@@ -1,31 +1,32 @@
 clear all;
-fatDir=fullfile('Z:\biac2\kgs\projects\babybrains\mri\');
+fatDir=fullfile('/share/kalanit//biac2/kgs/projects/babybrains/mri/');
 
-sessid={'bb04\mri0\dwi\' 'bb05\mri0\dwi\' 'bb07\mri0\dwi\',...
-    'bb11\mri0\dwi\', 'bb12\mri0\dwi\' 'bb14\mri0\dwi',...
-    'bb17\mri0\dwi\' 'bb18\mri0\dwi\' 'bb22\mri0\dwi',...
-    'bb02\mri3\dwi\' 'bb04\mri3\dwi\' 'bb05\mri3\dwi\' 'bb07\mri3\dwi\',...
-    'bb08\mri3\dwi\' 'bb11\mri3\dwi\' 'bb12\mri3\dwi\',...
-    'bb14\mri3\dwi\' 'bb15\mri3\dwi\' 'bb18\mri3\dwi\',...
-    'bb02\mri6\dwi\' 'bb04\mri6\dwi\' 'bb05\mri6\dwi\' 'bb07\mri6\dwi\' ,...
-    'bb08\mri6\dwi\' 'bb11\mri5\dwi\' 'bb12\mri6\dwi\',...
-    'bb14\mri6\dwi\' 'bb15\mri6\dwi\' 'bb19\mri6\dwi\'};
+sessid={'bb04/mri0/dwi/' 'bb05/mri0/dwi/' 'bb07/mri0/dwi/',...
+    'bb11/mri0/dwi/', 'bb12/mri0/dwi/' 'bb14/mri0/dwi',...
+    'bb17/mri0/dwi/' 'bb18/mri0/dwi/' 'bb22/mri0/dwi',...
+    'bb02/mri3/dwi/' 'bb04/mri3/dwi/' 'bb05/mri3/dwi/' 'bb07/mri3/dwi/',...
+    'bb08/mri3/dwi/' 'bb11/mri3/dwi/' 'bb12/mri3/dwi/',...
+    'bb14/mri3/dwi/' 'bb15/mri3/dwi/' 'bb18/mri3/dwi/',...
+    'bb02/mri6/dwi/' 'bb04/mri6/dwi/' 'bb05/mri6/dwi/' 'bb07/mri6/dwi/' ,...
+    'bb08/mri6/dwi/' 'bb11/mri5/dwi/' 'bb12/mri6/dwi/',...
+    'bb14/mri6/dwi/' 'bb15/mri6/dwi/' 'bb19/mri6/dwi/'};
 
 
 runName={'94dir_run1'};
 t1_name=['t2_biascorr_acpc_masked.nii.gz'];
 
-for s=1:9%:length(sessid) %done is: 4,6
+%loop through subjects and load the R1 and MD data
+for s=1:9
     close all;
     for r=1:length(runName)
-        session=strsplit(sessid{s},'\')
+        session=strsplit(sessid{s},'/')
         fgName=['WholeBrainFG_classified_withBabyAFQ_clean.mat']
         subject=session{1};
         age=session{2};
-        anatid=strcat(subject,'\',age,'\preprocessed_acpc\')
+        anatid=strcat(subject,'/',age,'/preprocessed_acpc/')
         
         
-        cd(fullfile(fatDir,sessid{s}, runName{r},'dti94trilin\fibers\afq'))
+        cd(fullfile(fatDir,sessid{s}, runName{r},'dti94trilin/fibers/afq'))
         qmr=load(strcat('TractQmr_withR1_masked_ventr_',fgName))
         
         idx=0
@@ -36,21 +37,31 @@ for s=1:9%:length(sessid) %done is: 4,6
             y_coor_acrossS(:,idx,s)=qmr.SuperFiber(bundles).fibers{1,1}(2,nodes);
             z_coor_acrossS(:,idx,s)=qmr.SuperFiber(bundles).fibers{1,1}(3,nodes);
             R1_acrossS(:,idx,s)=qmr.R1AcrNodes(nodes,bundles);
+            Md_acrossS(:,idx,s)=qmr.MdAcrNodes(nodes,bundles);
         end
     end
 end
 
+%set up the figure
 x_coor=mean(x_coor_acrossS,3);
 y_coor=mean(y_coor_acrossS,3);
 z_coor=mean(z_coor_acrossS,3);
 R1=mean(R1_acrossS,3);
-load('Z:/biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/slopeMeanR1AcrForPy.mat');
+Md=mean(Md_acrossS,3);
+
+load('/share/kalanit//biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/slopeMeanR1AcrForPy.mat');
+load('/share/kalanit//biac2/kgs/projects/babybrains/mri/code/babyDWI/python/data/slopeMeanMdAcrForPy.mat');
 R1_slopes_all=slopeMeanR1([1:600, 801:2600],1);
 R1_slopes=R1_slopes_all(1:10:2400,1);
 
-colors=load('Z:/biac2/kgs/projects/babybrains/mri/code/babyDWI/colors_final.csv')
+Md_slopes_all=slopeMeanMd([1:600, 801:2600],1);
+Md_slopes=Md_slopes_all(1:10:2400,1);
+
+colors=load('/share/kalanit//biac2/kgs/projects/babybrains/mri/code/babyDWI/colors_final.csv')
 c=colors([1:6 9:26],:)
 c_rep=repelem([c(:,1),c(:,2),c(:,3)],10,  1)
+
+%fig 5a
 scatter3(abs(x_coor(:)),y_coor(:),z_coor(:),70,c_rep,'filled')    % draw the scatter plot
 ax = gca;
 xlabel('x')
@@ -59,7 +70,7 @@ zlabel('z')
 set(gca,'FontSize',20);  box off; set(gca,'Linewidth',2); 
 hold on
 
-%% R1 at mri0
+% Fig 5b R1 in newborns
 R1=R1*1000
 colormap(hot)
 caxis([min(R1(:))+0.01,max(R1(:))+0.1])
@@ -73,7 +84,8 @@ xlim([min(abs(x_coor(:))),max(abs(x_coor(:)))])
 ylim([min(y_coor(:)),max(y_coor(:))])
 zlim([min(z_coor(:)),max(z_coor(:))])
 colorbar('off')
-%% R1 slope
+
+% Fig 5c R1 slopes
 colormap(hot)
 caxis([min(R1_slopes(:)+0.0002),max(R1_slopes(:))+0.0001])
 scatter3(abs(x_coor(:)),y_coor(:),z_coor(:),70,R1_slopes(:),'filled')    % draw the scatter plot
@@ -81,7 +93,31 @@ ax = gca;
 colorbar
 colorbar('off');
 
-%% Fit a linear model
+% Fig 5d, MD in newborns
+%Md=Md/1000
+colormap(winter)
+caxis([min(Md(:)),max(Md(:))])
+scatter3(abs(x_coor(:)),y_coor(:),z_coor(:),70,Md(:),'filled')    % draw the scatter plot
+ax = gca;
+colorbar;
+xlabel('x')
+ylabel('y')
+zlabel('z')
+xlim([min(abs(x_coor(:))),max(abs(x_coor(:)))])
+ylim([min(y_coor(:)),max(y_coor(:))])
+zlim([min(z_coor(:)),max(z_coor(:))])
+colorbar('off')
+
+% Fig 5e, MD slopes
+colormap(winter)
+caxis([min(Md_slopes(:)),max(Md_slopes(:))])
+scatter3(abs(x_coor(:)),y_coor(:),z_coor(:),70,Md_slopes(:),'filled')    % draw the scatter plot
+ax = gca;
+colorbar
+colorbar('off');
+
+
+%% This computes the stats associated with Fig 5
 t=repelem([1:24],10,1)
 TractsVec=reshape(t,[240, 1])
 R1atBirthVec=R1(:);
